@@ -14,8 +14,8 @@ def test_register_login_login_register_when_logged_in(test_app, client, user_dic
 
     with test_app.test_request_context():
         response = client.post('/login',
-        data=user_dict,
-        follow_redirects=True,
+            data=user_dict,
+            follow_redirects=True,
         )
         assert response.status_code == 200
         assert b"Hi, doe!" in response.data # Check that was redirected to /index
