@@ -20,6 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           make install-dev
-      - name: Test with make
+      - name: Test with pylint
         run: |
-          make test
+          make test-unit
+          make test-integration
