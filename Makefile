@@ -134,6 +134,13 @@ test-unit: clean
 
 
 
+# target: test-docker                    - Run tests in docker compose
+.PHONY: test-docker
+test-docker: 
+	docker compose run test
+
+
+
 # target: run-test test=test-file.py   - Run one test file
 .PHONY: run-test
 run-test:
