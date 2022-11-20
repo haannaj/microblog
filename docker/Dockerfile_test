@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1.4
+
+FROM python:3.8-alpine
+
+WORKDIR /home/installation
+
+COPY requirements requirements
+
+
+RUN <<-EOF
+    python -m venv .venv
+    .venv/bin/pip3 install -r requirements/test.txt
+    
+EOF
+
+WORKDIR /home/microblog
+
+RUN apk add make=4.3-r0 --no-cache
+
+
+ENTRYPOINT ["./boot_test.sh"]
