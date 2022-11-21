@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  call-workflow:
+  test:
     uses: haannaj/microblog/.github/workflows/main.yml@master
   push_to_registry:
     name: Push Docker image to Docker Hub
