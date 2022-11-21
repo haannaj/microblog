@@ -7,8 +7,9 @@ on:
 
 jobs:
   test:
-    needs: haannaj/microblog/.github/workflows/main.yml@master
+    uses: haannaj/microblog/.github/workflows/main.yml@master
   push_to_registry:
+    needs: test
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
