@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Extract metadata (tags, labels) for Docker
-         id: meta
+        id: meta
         uses: docker/metadata-action@v4
         with:
           images: hajh20/microblog
