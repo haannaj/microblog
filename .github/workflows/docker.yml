@@ -35,4 +35,3 @@ jobs:
           push: true
           tags: hajh20/microblog:1.0.2-prod
           labels: ${{ steps.meta.outputs.labels }}
-
