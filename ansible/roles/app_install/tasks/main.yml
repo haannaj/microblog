@@ -1,0 +1,19 @@
+---
+- name: Remove image
+  docker_image:
+    name: "{{ image_name }}"
+    state: absent
+    force_absent: yes
+
+- name: Pull microblog image and launch container
+  docker_container:
+    name: microblog-prod
+    image: "{{ image_name }}"
+    state: started
+    pull: yes
+    restart_policy: always
+    env:
+      DATABASE_URL: mysql+pymysql://microblog:password@{{ groups['database'][0] }}:3306/microblog
+    ports:
+      - "8000:5000"
+
