@@ -5,7 +5,7 @@
     state: absent
     force_absent: yes
 
-- name: Pull microblog image and launch container
+- name: Pull microblog-prod
   docker_container:
     name: microblog-prod
     image: "{{ image_name }}"
