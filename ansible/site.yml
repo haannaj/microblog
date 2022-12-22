@@ -6,3 +6,7 @@
 -   import_playbook: 10-first-minutes.yml
 -   import_playbook: docker_install.yml
 -   import_playbook: db_install.yml
+-   import_playbook: deploy_lb.yml
+-   import_playbook: app_install.yml
+-   import_playbook: monitoring_setup.yml
+

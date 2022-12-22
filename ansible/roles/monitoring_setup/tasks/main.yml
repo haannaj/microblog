@@ -1,0 +1,70 @@
+---
+- name: Remove image
+  docker_image:
+    name: prom/node-exporter:v1.2.2
+    state: absent
+    force_absent: yes
+    
+- name: Remove image
+  docker_image:
+    name: prom/prometheus:v2.31.1
+    state: absent
+    force_absent: yes
+
+- name: Remove image
+  docker_image:
+    name: grafana/grafana:8.2.4
+    state: absent
+    force_absent: yes
+
+- name: copy docker-compose
+  template:
+    src: docker-compose.yml
+    dest: ./docker-compose.yml
+
+- name: copy Grafana.ini
+  template:
+    src: grafana.ini
+    dest: ./grafana.ini
+
+- name: copy Prometheus config
+  template:
+    src: prometheus.yml
+    dest: ./prometheus.yml
+
+- name: Start docker-compose
+  community.docker.docker_compose:
+    project_src: ./
+    files:
+      - docker-compose.yml
+  
+- name: Prometheus as data source
+  community.grafana.grafana_datasource:
+    name: prometheus
+    url: http://0.0.0.0:3000
+    ds_type: prometheus
+    ds_url: http://prometheus:9090
+
+- name: Node exporter as dashboard
+  community.grafana.grafana_dashboard:
+    grafana_url: http://0.0.0.0:3000
+    grafana_user: "admin"
+    grafana_password: "admin"
+    dashboard_id: 1860
+    dashboard_revision: 22
+
+# - name: Add Flask App dashboard
+#   community.grafana.grafana_dashboard:
+#     grafana_url: http://0.0.0.0:3000
+#     grafana_user: "admin"
+#     grafana_password: "admin"
+#     path: "https://gist.githubusercontent.com/AndreasArne/433f902f9b986c301f2b2877454a581f/raw/4898bb2013b469cf74ace82d2d5aa39e073cb069/flaskdash.json"
+
+# - name: Add Nginx dashboard
+#   community.grafana.grafana_dashboard:
+#     grafana_url: http://0.0.0.0:3000
+#     grafana_user: "admin"
+#     grafana_password: "admin"
+#     dashboard_id: 12708
+
+

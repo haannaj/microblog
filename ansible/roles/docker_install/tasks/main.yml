@@ -10,6 +10,7 @@
       apt:
         name:
           - python3-docker
+          - docker-compose
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -27,6 +28,7 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-compose-plugin
         state: latest
         update_cache: true
 

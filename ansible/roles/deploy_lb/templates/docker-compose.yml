@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx/nginx-prometheus-exporter:0.4.2
+    restart: always
+    command:
+      - "--nginx.scrape-uri=https://devopskurs.me/metrics"
+      - "--nginx.retries=10"
+      - "--nginx.ssl-verify=false"
+      - "--web.telemetry-path=/prometheus"
+    ports:
+      - 9113:9113
+      

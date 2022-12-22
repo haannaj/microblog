@@ -8,6 +8,8 @@
 # General setup
 #
 
+export PROMETHEUS_MULTIPROC_DIR=/tmp
+
 # Set default target
 .DEFAULT_GOAL := test
 

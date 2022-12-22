@@ -19,6 +19,12 @@
     shell: "certbot certonly --standalone --noninteractive --expand --agree-tos --email {{ admin_email }} -d {{ domain_name }} -d www.{{ domain_name }}"
     when: not letsencrypt_cert.stat.exists
 
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+  when: not letsencrypt_cert.stat.exists
+
 - name: Remove default config
   file: 
     path: /etc/nginx/sites-enabled/default
@@ -43,3 +49,20 @@
     src: /etc/nginx/sites-available/load-balancer.conf
     path: /etc/nginx/sites-enabled/load-balancer.conf
     state: link
+
+- name: Remove image
+  docker_image:
+    name: nginx/nginx-prometheus-exporter:0.4.2
+    state: absent
+    force_absent: yes
+
+- name: copy docker-compose
+  template:
+    src: docker-compose.yml
+    dest: ./docker-compose.yml
+    
+- name: Start docker-compose
+  community.docker.docker_compose:
+    project_src: ./
+    files:
+      - docker-compose.yml
