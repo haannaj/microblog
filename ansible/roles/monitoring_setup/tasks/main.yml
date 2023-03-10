@@ -53,18 +53,18 @@
     dashboard_id: 1860
     dashboard_revision: 22
 
-- name: Add Flask App dashboard
-  community.grafana.grafana_dashboard:
-    grafana_url: http://0.0.0.0:3000
-    grafana_user: "admin"
-    grafana_password: "admin"
-    path: "https://gist.githubusercontent.com/AndreasArne/433f902f9b986c301f2b2877454a581f/raw/4898bb2013b469cf74ace82d2d5aa39e073cb069/flaskdash.json"
+# - name: Add Flask App dashboard
+#   community.grafana.grafana_dashboard:
+#     grafana_url: http://0.0.0.0:3000
+#     grafana_user: "admin"
+#     grafana_password: "admin"
+#     path: "https://gist.githubusercontent.com/AndreasArne/433f902f9b986c301f2b2877454a581f/raw/4898bb2013b469cf74ace82d2d5aa39e073cb069/flaskdash.json"
 
-- name: Add Nginx dashboard
-  community.grafana.grafana_dashboard:
-    grafana_url: http://0.0.0.0:3000
-    grafana_user: "admin"
-    grafana_password: "admin"
-    dashboard_id: 12708
+# - name: Add Nginx dashboard
+#   community.grafana.grafana_dashboard:
+#     grafana_url: http://0.0.0.0:3000
+#     grafana_user: "admin"
+#     grafana_password: "admin"
+#     dashboard_id: 12708
 
 

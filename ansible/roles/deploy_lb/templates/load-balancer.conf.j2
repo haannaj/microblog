@@ -23,13 +23,17 @@ http {
        listen 443 ssl;
        server_name  {{ domain_name }} www.{{ domain_name }};
        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
+       add_header Cache-Control "no-cache, no-store, must-revalidate";
+       add_header X-Content-Type-Options "nosniff";
+       
         
        ssl_certificate /etc/letsencrypt/live/{{ domain_name }}/cert.pem;
        ssl_certificate_key /etc/letsencrypt/live/{{ domain_name }}/privkey.pem;
        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
        location / {
-          proxy_pass http://app-hosts;
+         proxy_pass http://app-hosts;
+         proxy_cookie_path / "/; HttpOnly; Secure; SameSite=strict";
        }
 
        location /metrics {
