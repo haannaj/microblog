@@ -1,0 +1,25 @@
+# 03-ingress.yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microblog
+  annotations:
+    kubernetes.io/ingress.class: "nginx" 
+    cert-manager.io/issuer: "letsencrypt-staging"
+
+spec:
+  tls: 
+  - hosts:
+    - devopskurs.me
+    secretName: demo-tls 
+  rules:
+  - host: devopskurs.me
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: microblog
+              port:
+                number: 5000
